@@ -14,7 +14,7 @@ import { CustomersComponent } from './customers/customers.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
