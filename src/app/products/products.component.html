@@ -1,5 +1,8 @@
 <div class="container">
-    <div class="card">
+    <ng-template #errors>
+        <div class="text-danger">{{errorMessage}}</div>
+    </ng-template>
+    <div class="card" *ngIf="products; else errors">
         <div class="card-header">Products List</div>
         <div class="card-body">
             <table class="table">
@@ -13,6 +16,20 @@
                         <td>{{p.id}}</td>
                         <td>{{p.name}}</td>
                         <td>{{p.price}}</td>
+                        <td>
+                            <i *ngIf="p.promotion == true" class="bi bi-heart-fill text-success"></i>
+                        </td>
+                        <td>
+                            <button [ngClass]="p.promotion == true?'btn-danger':'btn-success'" class="btn ">
+                                <span *ngIf="p.promotion == true">Promo Off</span>
+                                <span *ngIf="p.promotion == false">Promo On</span>
+                            </button>
+                        </td>
+                        <td>
+                            <button (click)="handleDeleteProduct(p)" class="btn btn-danger">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
