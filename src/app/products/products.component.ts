@@ -10,6 +10,9 @@ import { ProductService } from '../services/product.service';
 })
 export class ProductsComponent implements OnInit {
   products! : Array<Product>;
+  currentPage : number=0;
+  pageSize : number=5;
+  totalPages : number=0;
   errorMessage! : string;
   searchFormGroup! : FormGroup;
 
@@ -19,8 +22,20 @@ export class ProductsComponent implements OnInit {
     this.searchFormGroup = this.fb.group({
       keyword : this.fb.control(null)
     });
-    this.handleGetAllProducts();
+    this.handleGetPageProducts();
   
+  }
+  handleGetPageProducts(){
+    this.productService.getPageProducts(this.currentPage, this.pageSize).subscribe({
+      next : (data) =>{
+        this.products = data.products;
+        this.totalPages = data.totalPages;
+      },
+      error : (err) => {
+        this.errorMessage = err;
+
+      }
+    });
   }
 
   handleGetAllProducts(){
