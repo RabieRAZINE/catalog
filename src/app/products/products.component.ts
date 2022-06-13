@@ -30,6 +30,7 @@ export class ProductsComponent implements OnInit {
       next : (data) =>{
         this.products = data.products;
         this.totalPages = data.totalPages;
+        console.log(this.totalPages);
       },
       error : (err) => {
         this.errorMessage = err;
@@ -84,5 +85,11 @@ export class ProductsComponent implements OnInit {
         this.products = data;
       }
     })
+  }
+
+
+  gotoPage(i : number){
+    this.currentPage=i;
+    this.handleGetPageProducts();
   }
 }
